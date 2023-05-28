@@ -15,6 +15,15 @@ def teardown_db(error):
     """closes the storage on teardown"""
     storage.close()
 
+
+@app.errorhandler(404)
+def page_not_found(e):
+    """handler for 404 errors that returns a JSON-formatted
+    404 status code response.
+    """
+    return ({'error': 'Not found'}), 404
+
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000,
             threaded=True, debug=True)
